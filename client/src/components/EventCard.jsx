@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
+
 function EventCard({ title, desc }) {
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6">
-      <h2 className="text-xl font-bold">{title}</h2>
+    <div className="shadow-lg rounded-xl p-6 bg-white">
+      <h2 className="text-2xl font-bold">{title}</h2>
+      <p className="mt-3 text-gray-600">{desc}</p>
 
-      <p className="text-gray-600 mt-3">{desc}</p>
-
-      <button className="bg-blue-700 text-white px-4 py-2 rounded mt-5 hover:bg-blue-800">
-        Register
-      </button>
+      <Link
+        to="/events"
+        className="inline-block mt-5 bg-blue-700 text-white px-4 py-2 rounded"
+      >
+        View Events
+      </Link>
     </div>
   );
 }

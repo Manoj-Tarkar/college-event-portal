@@ -8,26 +8,41 @@ function CreateEvent() {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [venue, setVenue] = useState("");
+   const [image, setImage] = useState(null);
+   
+ 
+   const handleCreate = async () => {
+  try {
+    const formData = new FormData();
 
-  const handleCreate = async () => {
-    try {
-      await API.post("/events", {
-        title,
-        description,
-        date,
-        venue,
-      });
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("date", date);
+    formData.append("venue", venue);
 
-      alert("Event Created Successfully!");
-
-      setTitle("");
-      setDescription("");
-      setDate("");
-      setVenue("");
-    } catch (err) {
-      alert(err.response?.data?.message || "Error creating event");
+    if (image) {
+      formData.append("image", image);
     }
-  };
+
+    await API.post("/events", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    alert("Event Created Successfully!");
+
+    setTitle("");
+    setDescription("");
+    setDate("");
+    setVenue("");
+    setImage(null);
+
+  } catch (err) {
+    console.log(err);
+    alert(err.response?.data?.message || "Error creating event");
+  }
+};
 
   return (
     <>
@@ -68,7 +83,12 @@ function CreateEvent() {
             onChange={(e) => setVenue(e.target.value)}
             className="w-full border p-3 rounded mb-4"
           />
-
+           <input
+  type="file"
+  accept="image/*"
+  onChange={(e) => setImage(e.target.files[0])}
+  className="w-full border p-3 rounded mb-4"
+/>
           <button
             onClick={handleCreate}
             className="w-full bg-blue-700 text-white py-3 rounded"

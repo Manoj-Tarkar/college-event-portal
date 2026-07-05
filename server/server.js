@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
-
+import registrationRoutes from "./routes/registrationRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/registrations", registrationRoutes);
+
 
 mongoose
   .connect(process.env.MONGO_URI)

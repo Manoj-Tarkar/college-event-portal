@@ -7,7 +7,9 @@ import Events from "./pages/Events";
 import Dashboard from "./pages/Dashboard";
 import CreateEvent from "./pages/CreateEvent";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import EventDetails from "./pages/EventDetails";
+import MyEvents from "./pages/MyEvents";
+import EditEvent from "./pages/EditEvent";
 function App() {
   return (
     <Routes>
@@ -15,6 +17,9 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/event/:id" element={<EventDetails />} />
+      <Route path="/my-events" element={<MyEvents />} />
+      <Route path="/edit-event/:id" element={<EditEvent />} />
       <Route
   path="/dashboard"
   element={

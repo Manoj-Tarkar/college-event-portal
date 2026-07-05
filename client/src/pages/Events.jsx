@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import API from "../api/api";
+import { Link } from "react-router-dom";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -32,23 +33,41 @@ function Events() {
           {events.map((event) => (
             <div
               key={event._id}
-              className="bg-white shadow-lg rounded-xl p-6"
+              className="bg-white shadow-lg rounded-xl overflow-hidden"
             >
-              <h2 className="text-2xl font-bold">
-                {event.title}
-              </h2>
+              {/* Event Image */}
+              {event.image && (
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
 
-              <p className="mt-3 text-gray-600">
-                {event.description}
-              </p>
+              <div className="p-6">
+                <h2 className="text-2xl font-bold">
+                  {event.title}
+                </h2>
 
-              <p className="mt-3">
-                📅 {event.date}
-              </p>
+                <p className="mt-3 text-gray-600">
+                  {event.description}
+                </p>
 
-              <p>
-                📍 {event.venue}
-              </p>
+                <p className="mt-3">
+                  📅 {event.date}
+                </p>
+
+                <p>
+                  📍 {event.venue}
+                </p>
+
+                <Link
+                  to={`/event/${event._id}`}
+                  className="inline-block mt-5 bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
           ))}
         </div>
